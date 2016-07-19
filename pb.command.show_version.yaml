@@ -1,0 +1,15 @@
+
+---
+- name: Gather user information
+  hosts: all
+  connection: local
+  gather_facts: no
+  tasks:
+  - name: Gather user information
+    junos_command:
+      commands:
+        - show system users
+      provider: "{{ credential }}"
+    register: result
+
+  - debug: var=result.stdout

@@ -1,0 +1,17 @@
+
+---
+- name: Gather ge-0/0/0 interface information
+  hosts: all
+  connection: local
+  gather_facts: no
+  tasks:
+  - name: Gather ge-0/0/0 interface information
+    junos_command:
+      commands:
+        - show interfaces ge-0/0/0
+      waitfor:
+        - "result[0].interface-information.physical-interface.name eq ge-0/0/0"
+      provider: "{{ credential }}"
+    register: result
+
+  - debug: var=result.stdout

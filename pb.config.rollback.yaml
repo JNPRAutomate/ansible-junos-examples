@@ -1,0 +1,12 @@
+
+---
+- name: Change configuration using junos_config module
+  hosts: vsrx1
+  connection: local
+  gather_facts: no
+  tasks:
+
+  - name: Rollback configuration to version -2
+    junos_config:
+      rollback: 2
+      provider: "{{ credential }}"

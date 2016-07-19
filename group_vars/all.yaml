@@ -1,0 +1,8 @@
+
+credential:
+  host: "{{ ansible_ssh_host }}"
+  port: "{{ ansible_ssh_port }}"
+  username: root
+  password: Juniper
+
+ansible_python_interpreter: /usr/local/bin/python

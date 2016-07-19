@@ -1,0 +1,23 @@
+
+host:
+    loopback:
+        ip: 1.1.1.2
+
+users:
+  - name: user
+    uid: 2000
+    class: read-only
+    sshkey:
+      - key
+
+interfaces:
+  - name: ge-0/0/1
+    description: First interface
+    ip: 192.168.1.2
+    peer: 192.168.1.1
+    mask: 24
+  - name: ge-0/0/2
+    description: Second interface
+    ip: 192.168.2.2
+    peer: 192.168.2.1
+    mask: 24

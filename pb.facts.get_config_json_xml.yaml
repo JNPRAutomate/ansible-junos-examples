@@ -1,0 +1,23 @@
+
+---
+- name: junos_facts module
+  hosts: vsrx1
+  connection: local
+  gather_facts: no
+  tasks:
+
+  ## This playbook will query facts and configuration in XML format on vsrx1
+  ## The configuration will be automatically converted from XML to JSON
+
+  - name: Collect device Facts and Configuration in XML
+    junos_facts:
+      config: yes
+      config_format: xml
+      provider: "{{ credential }}"
+    register: result
+
+  - name: Configuration in JSON (converted from XML)
+    debug: var=result.ansible_facts.config_json
+
+  - name: Configuration in XML
+    debug: var=result.ansible_facts.config

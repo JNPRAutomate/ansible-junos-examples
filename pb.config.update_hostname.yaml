@@ -1,0 +1,17 @@
+
+---
+- name: Change hostname on device
+  hosts: all
+  connection: local
+  gather_facts: no
+  tasks:
+
+  ## This playbook will change the hostname of the device with {{ inventory_hostname }}-test
+  ## This operation is idempotent, if executed twice, Ansible will not report change the second time.
+
+  - name: Change hostname on device
+    junos_config:
+      lines:
+        - set system host-name {{ inventory_hostname }}-test
+      comment: update config
+      provider: "{{ credential }}"

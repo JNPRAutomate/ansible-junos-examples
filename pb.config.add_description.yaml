@@ -1,0 +1,15 @@
+
+---
+- name: Change configuration using junos_config module
+  hosts: all
+  connection: local
+  gather_facts: no
+  tasks:
+
+  - name: Change description on interfaces based on a list of variable
+    junos_config:
+      lines:
+        - "set interfaces {{ item.name }} description \"{{ item.description }}\""
+      comment: "Update description of interface {{ item.name }}"
+      provider: "{{ credential }}"
+    with_items: "{{ interfaces }}"
