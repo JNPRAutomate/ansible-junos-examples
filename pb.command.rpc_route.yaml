@@ -1,0 +1,19 @@
+
+---
+- name: Execute RPC on device
+  hosts: all
+  connection: local
+  gather_facts: no
+  tasks:
+  - name: Execute show route terse using RPC
+    junos_command:
+      rpcs:
+        - "get_route_information terse=True"
+      provider: "{{ credential }}"
+    register: result
+
+  - name: Command results in JSON
+    debug: var=result.stdout[0]
+
+  - name: Command results in XML
+    debug: var=result.xml[0]

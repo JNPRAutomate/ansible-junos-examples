@@ -1,0 +1,15 @@
+# This task gets all Junos configuration from all devices
+- name: Deploy Configuration Template
+  hosts: all
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Build interfaces configuration based on template
+      template: src=templates/interfaces.j2 dest=/tmp/{{ inventory_hostname }}.conf
+    - name: Deploy config to device ... please wait
+      junos_template:
+        src: "/tmp/{{ inventory_hostname }}.conf"
+        action: replace
+        comment: "Applied by Ansible"
+        provider: "{{ credential }}"
