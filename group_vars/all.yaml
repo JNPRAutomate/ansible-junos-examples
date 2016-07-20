@@ -5,4 +5,4 @@ credential:
   username: root
   password: Juniper
 
-ansible_python_interpreter: /usr/local/bin/python
+# ansible_python_interpreter: /usr/local/bin/python
