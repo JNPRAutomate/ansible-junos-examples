@@ -34,7 +34,7 @@ Vagrant.configure(2) do |config|
           ansible.groups = {
               "all" => ["vsrx1", "vsrx2"]
           }
-          ansible.playbook = "pb.command.show_version.yaml"
+          ansible.playbook = "playbook-core/pb.command.show_version.yaml"
       end
   end
 end
