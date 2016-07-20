@@ -2,11 +2,11 @@
 
 Project to demonstrate new Core module for Junos in Ansible 2.1+
 In this project you'll find:
-- examples of playbooks for:
-  - junos_config: add config, delete config, rollback)
-  - junos_facts: collect facts, collect configuration in XML, TEXT or JSON)
-  - junos_command: execute cli commands or RPC on devices)
-  - junos_template: deploy configuration templates on device.
+- Examples of playbooks for:
+  - **junos_config**: add config, delete config, rollback
+  - **junos_facts**: collect facts, collect configuration in XML, TEXT or JSON
+  - **junos_command**: execute cli commands or RPC on devices
+  - **junos_template**: deploy configuration templates on device
 - Vagrant file to start a virtual topology with 2 vSRX
 
 # Virtual topology
@@ -46,6 +46,7 @@ vagrant ssh vsrx1
 vagrant ssh vsrx2
 ```
 
+# Examples of playbooks
 ## junos_config
 [Official documentation](https://docs.ansible.com/ansible/junos_config_module.html) on Ansible Website
 ### Add configuration lines on device
