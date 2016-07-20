@@ -25,8 +25,8 @@ vagrant plugin add vagrant-junos
 
 Once Vagrant is installed, you can start the topology
 ```
-git clone https://github.com/JNPRAutomate/xxxx
-cd xxxxx
+git clone https://github.com/JNPRAutomate/ansible-core-junos-examples.git
+cd ansible-core-junos-examples
 vagrant up
 ```
 
