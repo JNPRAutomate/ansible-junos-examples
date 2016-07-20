@@ -103,10 +103,10 @@ ansible-playbook pb.facts.get_config_txt.yaml
 ansible-playbook pb.template.push_interface.yaml
 ```
 
-## junos_packages
-[Official documentation](https://docs.ansible.com/ansible/junos_template_module.html) on Ansible Website
+## junos_package
+[Official documentation](https://docs.ansible.com/ansible/junos_package_module.html) on Ansible Website.  
 Example not available yet
 
 ## junos_netconf
-[Official documentation](https://docs.ansible.com/ansible/junos_template_module.html) on Ansible Website
+[Official documentation](https://docs.ansible.com/ansible/junos_netconf_module.html) on Ansible Website.  
 Example not available yet
