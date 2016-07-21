@@ -84,6 +84,11 @@ ansible-playbook playbook-core/pb.command.show_version.yaml
 ansible-playbook playbook-core/pb.command.show_interface.yaml
 ```
 
+### Use previous command output to only query interfaces status if interfaces are UP
+```
+ansible-playbook playbook-core/pb.command.show_ext_if_up.yaml
+```
+
 ## junos_facts
 [Official documentation](https://docs.ansible.com/ansible/junos_facts_module.html) on Ansible Website
 

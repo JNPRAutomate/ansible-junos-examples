@@ -1,0 +1,24 @@
+
+---
+- name: Gather extensive details for GE interfaces that are UP
+  hosts: all
+  connection: local
+  gather_facts: no
+  tasks:
+  - name: Gather all GE interfaces status
+    junos_command:
+      commands:
+        - show interfaces terse ge-0/0/*
+      provider: "{{ credential }}"
+    register: result
+
+  - debug: var=result.stdout
+
+  - name: Collect extensive information for interfaces ge-0/0/0 if Up
+    junos_command:
+      commands:
+        - show interfaces {{ item.name }} extensive
+      provider: "{{ credential }}"
+    with_items: "{{ result.stdout[0]['interface-information']['physical-interface'] }}"
+    register: int
+    when: (item['oper-status'] == 'up') and (item['name'] == 'ge-0/0/0')
