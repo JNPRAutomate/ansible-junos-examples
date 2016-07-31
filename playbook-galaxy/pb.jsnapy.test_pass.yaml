@@ -1,0 +1,37 @@
+---
+- name: Execute Tests with Jsnapy
+  hosts: all
+  connection: local
+  gather_facts: no
+  roles:
+    - Juniper.junos
+  tasks:
+    - name: "TEST1 - Check Interfaces are UP"
+      ignore_errors: true
+      junos_jsnapy:
+        host: "{{ ansible_ssh_host }}"
+        port: "{{ ansible_ssh_port }}"
+        user: root
+        passwd: Juniper
+        test_files: resources/test_junos_interface.yml
+        action: snapcheck
+        logfile: jsnap.log
+      register: test1
+    # - debug: var=test1 verbosity=2
+
+    - name: "TEST2 - Check Available Storage"
+      ignore_errors: true
+      junos_jsnapy:
+        host: "{{ ansible_ssh_host }}"
+        port: "{{ ansible_ssh_port }}"
+        user: root
+        passwd: Juniper
+        test_files: resources/test_junos_storage.yml
+        action: snapcheck
+        logfile: jsnap.log
+      register: test2
+
+    - assert:
+        that:
+          - "test1.passPercentage == 100"
+          - "test2.passPercentage == 100"

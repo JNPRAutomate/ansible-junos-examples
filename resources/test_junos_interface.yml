@@ -1,0 +1,18 @@
+tests_include:
+  - check_int_ext
+
+check_int_ext:
+    - command: show interfaces extensive
+    - iterate:
+        xpath: //interface-information/physical-interface[normalize-space(admin-status)='up' and logical-interface/address-family/address-family-name ]
+        tests:
+          - is-equal: oper-status, up
+            info: "Interface {{post['name']}} with Admin UP and Family defined are UP"
+            err: Interface {{post['name']}} is not UP UP
+
+    - iterate:
+        xpath: //interface-information/physical-interface[normalize-space(admin-status)="up" and logical-interface/address-family/address-family-name and interface-flapped/@seconds != '0']
+        tests:
+          - is-gt: interface-flapped/@seconds, 600
+            info: Interfaces {{ post['name'] }} with family defined are UP for more than 10 min ({{post['interface-flapped/@seconds']}}s)
+            err: Interface {{post['name']}} is Up since {{post['interface-flapped/@seconds']}} seconds
