@@ -121,9 +121,13 @@ Example not available yet
 # Ansible Galaxy - Examples of playbooks
 
 ## junos_jsnapy
-### Execute multiple tests define with jsnapy 
+### Execute multiple tests define with jsnapy
 ```
 ansible-playbook playbook-galaxy/pb.jsnapy.test_pass.yaml
+```
+### Generate test files dynamically with a jinja2 template
+```
+ansible-playbook playbook-galaxy/pb.jsnapy.template_test.yaml
 ```
 
 ## junos_get_config

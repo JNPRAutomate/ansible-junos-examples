@@ -1,0 +1,13 @@
+tests_include:
+  - check_storage
+
+check_storage:
+    - command: show system storage
+{% for partition in jsnapy.partitions %}
+    - iterate:
+        xpath: //system-storage-information/filesystem[normalize-space(mounted-on)='{{ partition.mount }}']
+        tests:
+          - is-lt: used-percent, {{ partition.max_size }}
+            info: "File system {{'{{post[\'mounted-on\']}}'}} use less than {{ partition.max_size }}%"
+            err: "File system {{'{{post[\'mounted-on\']}}' }} use {{'{{post[\'used-percent\']}}'}} %"
+{% endfor %}

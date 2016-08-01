@@ -1,0 +1,35 @@
+---
+- name: Execute Tests with Jsnapy with dynamically generated Test files
+  hosts: all
+  connection: local
+  gather_facts: no
+  roles:
+    - Juniper.junos
+  tasks:
+
+##########################################################################
+# Test file are dynamically generated based on information
+# stored in the host_vars directory.
+# vqfx1 is expected to fail because the value for "/" is lower than the current value
+#####################################################################
+
+    - name: "Generate test files based on Jinja2 template"
+      template:
+        src: ../resources/test_junos_storage.tpl.j2
+        dest: "resources/test_junos_storage_{{inventory_hostname}}.yaml"
+
+    - name: "TEST1 - Check Available Storage"
+      ignore_errors: true
+      junos_jsnapy:
+        host: "{{ ansible_ssh_host }}"
+        port: "{{ ansible_ssh_port }}"
+        user: root
+        passwd: Juniper
+        test_files: "resources/test_junos_storage_{{inventory_hostname}}.yaml"
+        action: snapcheck
+      register: test1
+
+    - name: Check tests results
+      assert:
+        that:
+          - "test1.passPercentage == 100"
